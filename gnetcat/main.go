@@ -9,9 +9,9 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/ductran999/go-socket-poc/gnetcat/client"
-	"github.com/ductran999/go-socket-poc/gnetcat/server"
-	"github.com/ductran999/go-socket-poc/logger"
+	"github.com/ductran999/xplr-system-design/gnetcat/client"
+	"github.com/ductran999/xplr-system-design/gnetcat/server"
+	"github.com/ductran999/xplr-system-design/logger"
 )
 
 func main() {

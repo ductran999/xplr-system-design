@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo REST API</title>
+</head>
+<body style="font-family: Arial; padding: 20px;">
+    <h2>Test REST API</h2>
+    
+    <button onclick="getUsers()"> List Users  (GET)</button>
+    <pre id="result" style="background: #f4f4f4; padding: 10px; margin-top: 20px; border-radius: 5px;"></pre>
+
+    <script>
+        const resultDiv = document.getElementById('result');
+
+        async function getUsers() {
+            try {
+                const response = await fetch('http://localhost:8080/users');
+                const data = await response.json();
+                resultDiv.innerText = JSON.stringify(data, null, 2);
+            } catch (error) {
+                console.error('Lỗi GET:', error);
+            }
+        }
+    </script>
+</body>
+</html>

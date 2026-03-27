@@ -6,7 +6,7 @@ import (
 	"io"
 	"net"
 
-	"github.com/ductran999/go-socket-poc/logger"
+	"github.com/ductran999/xplr-system-design/logger"
 )
 
 type GNetCatServer interface {
