@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo Long Polling</title>
+</head>
+<body style="font-family: Arial; padding: 20px;">
+    <h2>Notify Real-time (Long Polling)</h2>
+    
+    <div style="margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; background: #f9f9f9; width: 400px;">
+        <p><strong>News feed</strong></p>
+        <div id="messages" style="height: 150px; overflow-y: auto; background: white; padding: 10px; border: 1px solid #ddd;">
+            <i style="color: gray;"> Waiting Server...</i>
+        </div>
+    </div>
+
+    <div style="background: #e9ecef; padding: 20px; width: 400px;">
+        <h3>Send news</h3>
+        <input type="text" id="msgInput" placeholder="Input message..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        const messagesDiv = document.getElementById('messages');
+        const msgInput = document.getElementById('msgInput');
+
+        async function subscribe() {
+            try {
+                // Send request to server (server will hang util it have response data)
+                const response = await fetch('http://localhost:8080/messages');
+                if (response.status === 200) {
+                    const resp = await response.json();
+                    
+                    const p = document.createElement('p');
+                    p.innerText = `[${resp.data.timestamp}] ${resp.data.message}`;
+                    messagesDiv.appendChild(p);
+                    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                }
+            } catch (error) {
+                console.log("Lost connection. Retry after 2 seconds...");
+                await new Promise(resolve => setTimeout(resolve, 2000));
+            } finally {
+                subscribe(); // Always wait for response
+            }
+        }
+
+        subscribe();
+
+        async function sendMessage() {
+            const text = msgInput.value;
+            if(!text) return;
+
+            await fetch('http://localhost:8080/messages', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: text })
+            });
+            msgInput.value = '';
+        }
+    </script>
+</body>
+</html>
