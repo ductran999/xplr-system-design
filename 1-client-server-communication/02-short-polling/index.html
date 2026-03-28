@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo Short Pooling API</title>
+</head>
+<body style="font-family: Arial; padding: 20px;">
+    <h2>Test Short Polling</h2>
+    
+    <button onclick="getTask()">Refresh</button>
+    <pre id="result" style="background: #f4f4f4; padding: 10px; margin-top: 20px; border-radius: 5px;"></pre>
+
+    <script>
+        const resultDiv = document.getElementById('result');
+
+        async function getTask() {
+            try {
+                const response = await fetch('http://localhost:8080/tasks/1');
+                const data = await response.json();
+                resultDiv.innerText = JSON.stringify(data, null, 2);
+            } catch (error) {
+                console.error('GET failed:', error);
+            }
+        }
+
+        setInterval(() => {getTask()}, 5000);
+
+        getTask();
+    </script>
+</body>
+</html>
