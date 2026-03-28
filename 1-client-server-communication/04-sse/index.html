@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo SSE (Server-Sent Events)</title>
+</head>
+<body style="font-family: Arial; padding: 20px;">
+    <h2>News feed Real-time (Using SSE)</h2>
+    
+    <div style="margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; width: 400px;">
+        <p><strong>Dataflow (Only one connection):</strong></p>
+        <div id="messages" style="height: 200px; overflow-y: auto; background: #222; color: #0f0; padding: 10px; font-family: monospace;">
+            Connecting to server...
+        </div>
+    </div>
+
+    <div style="background: #e9ecef; padding: 20px; width: 400px;">
+        <input type="text" id="msgInput" placeholder="Input message..." />
+        <button onclick="sendMessage()">Broadcast</button>
+    </div>
+
+    <script>
+        const messagesDiv = document.getElementById('messages');
+        const msgInput = document.getElementById('msgInput');
+
+        const eventSource = new EventSource('http://localhost:8080/stream');
+
+        eventSource.onmessage = function(event) {
+            console.log("Received message from Server:", event.data);
+            
+            const p = document.createElement('p');
+            p.style.margin = "5px 0";
+            
+            try {
+                const data = JSON.parse(event.data);
+                p.innerText = `[${data.time}] ${data.text}`;
+            } catch (e) {
+                p.innerText = event.data;
+            }
+            
+            messagesDiv.appendChild(p);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        };
+
+        eventSource.onerror = function() {
+            console.error("Lost connection. Retrying...");
+            const p = document.createElement('p');
+            p.innerText = "--- Lost connection, trying to reconnect... ---";
+            p.style.color = "red";
+            messagesDiv.appendChild(p);
+        };
+
+
+        async function sendMessage() {
+            const text = msgInput.value;
+            if(!text) return;
+
+            await fetch('http://localhost:8080/messages', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: text })
+            });
+            msgInput.value = '';
+        }
+    </script>
+</body>
+</html>
