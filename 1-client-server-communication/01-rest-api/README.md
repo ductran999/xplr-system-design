@@ -49,10 +49,3 @@ REST (Representational State Transfer) is the most common architecture for clien
 - Repeated HTTP headers → extra overhead
 
 ---
-
-## 4. Demo Setup
-
-```bash
-npm init -y
-npm install express cors
-```

@@ -19,7 +19,7 @@
                 const data = await response.json();
                 resultDiv.innerText = JSON.stringify(data, null, 2);
             } catch (error) {
-                console.error('Lỗi GET:', error);
+                console.error('GET failed:', error);
             }
         }
     </script>
