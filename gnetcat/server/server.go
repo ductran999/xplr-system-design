@@ -4,9 +4,8 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log/slog"
 	"net"
-
-	"github.com/ductran999/xplr-system-design/logger"
 )
 
 type GNetCatServer interface {
@@ -44,7 +43,7 @@ func (s *server) Serve() error {
 		go func(c net.Conn) {
 			defer func() {
 				if err := c.Close(); err != nil {
-					logger.Warn("failed to close client connection", err.Error())
+					slog.Warn("failed to close client connection", "msg", err.Error())
 				}
 			}()
 
@@ -53,12 +52,12 @@ func (s *server) Serve() error {
 			for {
 				n, err := c.Read(buf)
 				if err != nil && errors.Is(err, io.EOF) {
-					logger.Info("client", c.RemoteAddr().String(), "close connection")
+					slog.Info("client", c.RemoteAddr().String(), "close connection")
 					return
 				}
 
 				if err != nil {
-					logger.Error("read error:", err.Error())
+					slog.Error("read error:", "error", err.Error())
 					return
 				}
 
@@ -67,7 +66,7 @@ func (s *server) Serve() error {
 
 				_, err = c.Write([]byte(ans))
 				if err != nil {
-					logger.Error("write error:", err.Error())
+					slog.Error("write error:", "error", err.Error())
 					return
 				}
 			}

@@ -4,6 +4,8 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
+	"log/slog"
 	"net"
 	"os"
 	"os/signal"
@@ -11,7 +13,6 @@ import (
 
 	"github.com/ductran999/xplr-system-design/gnetcat/client"
 	"github.com/ductran999/xplr-system-design/gnetcat/server"
-	"github.com/ductran999/xplr-system-design/logger"
 )
 
 func main() {
@@ -23,7 +24,7 @@ func main() {
 	var option int
 	_, err := fmt.Scanln(&option)
 	if err != nil {
-		logger.Fatal("invalid input:", err.Error())
+		log.Fatal("invalid input:", err.Error())
 	}
 
 	switch option {
@@ -32,20 +33,20 @@ func main() {
 	case 2:
 		startClient()
 	default:
-		logger.Error("Invalid option. Please enter 1 or 2.")
+		slog.Error("Invalid option. Please enter 1 or 2.")
 	}
 }
 
 func startServer() {
 	srv := server.NewServer()
 	if err := srv.Open(); err != nil {
-		logger.Fatal("failed to open server", err.Error())
+		log.Fatal("failed to open server", err.Error())
 	}
-	logger.Info("server listening on port 8080")
+	slog.Info("server listening on port 8080")
 
 	go func() {
 		if err := srv.Serve(); err != nil && !errors.Is(err, net.ErrClosed) {
-			logger.Error("server got error:", err.Error())
+			slog.Error("server got error:", "error", err.Error())
 		}
 	}()
 
@@ -55,15 +56,15 @@ func startServer() {
 func startClient() {
 	c := client.NewClient()
 	if err := c.Dial(); err != nil {
-		logger.Fatal("failed to dial to host", err.Error())
+		log.Fatal("failed to dial to host", err.Error())
 	}
-	logger.Info("server accept your call")
+	slog.Info("server accept your call")
 
 	go func() {
 		if err := c.Send(); err != nil &&
 			!errors.Is(err, net.ErrClosed) &&
 			!errors.Is(err, io.EOF) {
-			logger.Error(err.Error())
+			slog.Error(err.Error())
 		}
 	}()
 
@@ -75,12 +76,12 @@ func gracefulShutdown(close func() error) {
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
 	<-c
-	logger.Info("Shutting down...")
+	slog.Info("Shutting down...")
 
 	err := close()
 	if err != nil {
-		logger.Error("failed to shut down:", err.Error())
+		slog.Error("failed to shut down:", "error", err.Error())
 	} else {
-		logger.Info("shutdown cleanly")
+		slog.Info("shutdown cleanly")
 	}
 }
