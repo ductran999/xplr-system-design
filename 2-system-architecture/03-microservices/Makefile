@@ -7,11 +7,11 @@ proto: ## Generate Go code by buf
 
 .PHONY: order-svc
 order-svc: ## Run order server
-	go run order-service/main.go
+	cd order-service && go run main.go
 
 .PHONY: user-svc
 user-svc: ## Run user server
-	go run user-service/main.go
+	cd user-service && go run main.go
 
 .PHONY: help
 help: ## Show list of available commands

@@ -26,11 +26,11 @@ This repository serves as a **playground for studying backend architecture**, co
 │   ├── 📁 03-microservices/                # Fully decoupled, EACH SERVICE has its own DB
 │   ├── 📁 04-event-driven-eda/             # Communication via Message Broker (Kafka/RabbitMQ)
 │   ├── 📁 05-space-based/                  # Remove DB, ultra-fast processing on RAM grid
-│   ├── 📁 06-control-data-planes/          # Control Plane (brain) & Data Plane (execution)
+│   ├── 📁 06-service-mesh-planes/          # Control Plane (brain) & Data Plane (execution)
 │   ├── 📁 07-bff-backend-for-frontend/     # Separate APIs for each client (Web/Mobile)
-│   └── 📁 08-saga-pattern/                 # Distributed transaction management (Rollback/Compensation)
+│   └── 📁 08-saga-pattern/                 # Distributed transaction management
 │
-├── 📁 3-application-architecture/          # HOW CODE IS ORGANIZED INTERNALLY (Software Architecture)
+├── 📁 3-application-architecture/          # HOW CODE IS ORGANIZED INTERNALLY (Software Arch)
 │   ├── 📁 01-ui-patterns/                  # UI Layer Architectures (Frontend/Mobile)
 │   │   ├── 📁 mvc-pattern/                 # Model - View - Controller (Classic)
 │   │   ├── 📁 mvp-pattern/                 # Model - View - Presenter (Strict)
