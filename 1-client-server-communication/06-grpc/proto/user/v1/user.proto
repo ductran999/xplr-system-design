@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option go_package = "./proto/v1/user;userv1";
+
+package user.v1;
+
+// GetUserRequest
+message GetUserRequest {
+  int32 id = 1; 
+}
+
+// GetUserResponse
+message GetUserResponse {
+  int32 id = 1;
+  string name = 2;
+  string role = 3;
+}
+
+// UserService
+service UserService {
+  // GetUser
+  rpc GetUser (GetUserRequest) returns (GetUserResponse);
+}
