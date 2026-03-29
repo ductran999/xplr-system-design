@@ -7,5 +7,6 @@ use (
 	./1-client-server-communication/04-sse
 	./1-client-server-communication/05-websocket
 	./1-client-server-communication/06-grpc
+	./2-system-architecture/01-monolithic
 	./gnetcat
 )
