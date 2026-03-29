@@ -1,0 +1,11 @@
+go 1.25.1
+
+use (
+	./1-client-server-communication/01-rest-api
+	./1-client-server-communication/02-short-polling
+	./1-client-server-communication/03-long-polling
+	./1-client-server-communication/04-sse
+	./1-client-server-communication/05-websocket
+	./1-client-server-communication/06-grpc
+	./gnetcat
+)
