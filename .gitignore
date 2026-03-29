@@ -30,3 +30,6 @@ profile.cov
 # Editor/IDE
 .idea/
 .vscode/
+
+# db
+*.db
