@@ -1,0 +1,19 @@
+services:
+  nats:
+    image: nats:latest
+    container_name: nats
+    restart: unless-stopped
+    ports:
+      - "4222:4222"   # Client connections
+      - "8222:8222"   # Monitoring (http://localhost:8222)
+      - "6222:6222"   # Cluster (optional)
+    command: >
+      -js
+      -m 8222
+      -p 4222
+      --cluster_name nats-cluster
+    volumes:
+      - ./nats-data:/data
+
+volumes:
+  nats-data:

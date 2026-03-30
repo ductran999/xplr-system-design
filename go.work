@@ -10,5 +10,6 @@ use (
 	./2-system-architecture/01-monolithic
 	./2-system-architecture/02-service-based
 	./2-system-architecture/03-microservices
+	./2-system-architecture/04-event-driven-eda
 	./gnetcat
 )
