@@ -12,6 +12,7 @@ use (
 	./2-system-architecture/03-microservices
 	./2-system-architecture/04-event-driven-eda
 	./3-application-architecture/01-ui-patterns/mvc-pattern
+	./3-application-architecture/01-ui-patterns/mvp-pattern
 	./3-application-architecture/01-ui-patterns/mvvm-pattern
 	./3-application-architecture/02-layered-architecture
 	./gnetcat
