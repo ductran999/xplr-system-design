@@ -16,5 +16,6 @@ use (
 	./3-application-architecture/01-ui-patterns/mvvm-pattern
 	./3-application-architecture/01-ui-patterns/viper-pattern
 	./3-application-architecture/02-layered-architecture
+	./3-application-architecture/03-pipeline-architecture
 	./gnetcat
 )
