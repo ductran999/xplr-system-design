@@ -18,5 +18,6 @@ use (
 	./3-application-architecture/02-layered-architecture
 	./3-application-architecture/03-pipeline-architecture
 	./3-application-architecture/04-microkernel-architecture
+	./3-application-architecture/05-clean-architecture
 	./gnetcat
 )
