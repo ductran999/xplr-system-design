@@ -20,5 +20,6 @@ use (
 	./3-application-architecture/04-microkernel-architecture
 	./3-application-architecture/05-clean-architecture
 	./3-application-architecture/06-hexagonal-architecture
+	./3-application-architecture/07-cqrs
 	./gnetcat
 )
