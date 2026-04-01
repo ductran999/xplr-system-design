@@ -39,8 +39,9 @@ This repository serves as a **playground for studying backend architecture**, co
 │   ├── 📁 02-layered-architecture/         # Controller - Service - Repository (Standard)
 │   ├── 📁 03-pipeline-architecture/        # Sequential data processing (Pipe & Filter)
 │   ├── 📁 04-microkernel-architecture/     # Core system + plug-ins/extensions
-│   ├── 📁 05-clean-architecture/           # Onion/Hexagonal: logic fully independent of DB
-│   └── 📁 06-cqrs/                         # Separate write and read paths completely
+│   ├── 📁 05-clean-architecture/           # Clean arch: hexagonal with more circles
+│   ├── 📁 06-hexagonal-architecture/       # Onion/Hexagonal: logic fully independent of DB
+│   └── 📁 07-cqrs/                         # Separate write and read paths completely
 │
 ├── 📁 4-resilience-patterns/               # HOW SYSTEMS SURVIVE (Stability - *Reference*)
 │   ├── 📁 01-retry-strategy/               # Smart retries (Exponential Backoff)
