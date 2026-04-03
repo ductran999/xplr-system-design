@@ -33,3 +33,5 @@ profile.cov
 
 # db
 *.db
+
+**/gen/**
